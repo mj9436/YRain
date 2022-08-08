@@ -46,3 +46,17 @@ def dasan(request):
 def yangjae(request):
     return render(request, 'server/yangjae.html');
 
+def user_info(request):
+    return render(request, 'server/user_info.html');
+
+def profile(request):
+    return render(request, 'server/profile.html');
+
+def money(request):
+    return render(request, 'server/money.html');
+
+def app_info(request):
+    return render(request, 'server/app_info.html');
+
+
+
