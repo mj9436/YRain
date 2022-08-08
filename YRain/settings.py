@@ -75,11 +75,14 @@ WSGI_APPLICATION = 'YRain.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql', # mysqlclient librarly 설치
+        'NAME': 'YRain',
+        'USER': 'root',
+        'PASSWORD': '3rdeye', # mariaDB 설치 시 입력한 root 비밀번호 입력
+        'HOST': '127.0.0.1',
+        'PORT': '3306'
     }
 }
 

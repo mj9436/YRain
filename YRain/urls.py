@@ -23,13 +23,17 @@ import server.views
 urlpatterns = [
     path('polls/', include('server.urls')),
     path('admin/', admin.site.urls),
-    path('',server.views.main, name='main'),
+    path('',server.views.login, name='login'),
+    path('main/',server.views.main, name='main'),
     path('borrow/',server.views.borrow, name='borrow'),
     path('cur_status/', server.views.cur_status, name="cur_status"),
     path('borrow/dasan/', server.views.dasan, name="dasan"),
     path('borrow/yangjae/', server.views.yangjae, name="yangjae"),
-    path('record/', server.views.record, name="record"),
     path('user_info/', server.views.user_info, name="user_info"),
+    path('profile/', server.views.profile, name="profile"),
+    path('money/', server.views.money, name="money"),
+    path('app_info/', server.views.app_info, name="app_info"),
+    path('signup/', server.views.signup, name="signup"),
 ]
 
 urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

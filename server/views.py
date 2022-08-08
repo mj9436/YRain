@@ -1,9 +1,9 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-
-
+from .models import User
 #import RPi.GPIO as GPIO
 import time
+import logging
 servo_pin=18
 
 def main(request):
@@ -30,7 +30,7 @@ def main(request):
         time.sleep(1.0)
         pwm.stop()
         GPIO.cleanup()'''
-        return render(request, 'server/main.html', {'GET':'0도'});
+        return render(request, 'server/main.html', {'GET':"test"});
 
 def borrow(request):
     #if request.method=='POST':
@@ -46,8 +46,36 @@ def dasan(request):
 def yangjae(request):
     return render(request, 'server/yangjae.html');
 
-def record(request):
-    return render(request, 'server/record.html');
-
 def user_info(request):
     return render(request, 'server/user_info.html');
+
+def profile(request):
+    return render(request, 'server/profile.html');
+
+def money(request):
+    return render(request, 'server/money.html');
+
+def app_info(request):
+    return render(request, 'server/app_info.html');
+
+def login(request):    
+    if(request.method=="POST"):
+        users=User.objects.all()
+        IDtmp=request.POST['user_id']
+        try:
+            user=User.objects.get(user_id=IDtmp)
+            if(user.password==request.POST['password']):
+                response=render(request,'server/main.html')
+                request.session['user'] = user.user_id
+                return redirect(main)
+            return redirect(login)
+        except:
+            return redirect(login)
+    return render(request, 'server/login.html');
+
+def signup(request):
+    if(request.method=="POST"):
+        User.objects.create(user_id=request.POST['user_id'], password=request.POST['password'])
+        return redirect(login)
+    return render(request, 'server/signup.html');
+
