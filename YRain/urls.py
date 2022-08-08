@@ -26,4 +26,6 @@ urlpatterns = [
     path('cur_status/', server.views.cur_status, name="cur_status"),
     path('borrow/dasan/', server.views.dasan, name="dasan"),
     path('borrow/yangjae/', server.views.yangjae, name="yangjae"),
+    path('record/', server.views.record, name="record"),
+    path('user_info', server.views.user_info, name="user_info"),
 ]

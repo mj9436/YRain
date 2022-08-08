@@ -1,24 +1,14 @@
 
 {% extends 'server/base.html' %}
-
-<!DOCTYPE html>
-<html>
-    
-    <head lang="en">
-    </head>
-    <body>
-        
-        {% block contents %}
-        <form method="post">
-            {% csrf_token %}
-            <button value="0도" name="one">0도</button>
-        </form>
-        <form method="post">
-            {% csrf_token %}
-            <button value="180도" name="one">180도</button>
-        </form>
-        <h2>{{GET}}</h2>
-        <h2>{{POST}}</h2>
-        {% endblock contents %}
-    </body>
-</html>
+{% block contents %}
+<form method="post">
+    {% csrf_token %}
+    <button value="0도" name="one">0도</button>
+</form>
+<form method="post">
+    {% csrf_token %}
+    <button value="180도" name="one">180도</button>
+</form>
+<h2>{{GET}}</h2>
+<h2>{{POST}}</h2>
+{% endblock contents %}
