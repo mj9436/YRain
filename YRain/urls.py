@@ -21,5 +21,9 @@ import server.views
 urlpatterns = [
     path('polls/', include('server.urls')),
     path('admin/', admin.site.urls),
-    path('',server.views.index, name='index'),
+    path('',server.views.main, name='main'),
+    path('borrow/',server.views.borrow, name='borrow'),
+    path('cur_status/', server.views.cur_status, name="cur_status"),
+    path('borrow/dasan/', server.views.dasan, name="dasan"),
+    path('borrow/yangjae/', server.views.yangjae, name="yangjae"),
 ]
