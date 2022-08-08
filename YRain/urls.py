@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls.static import static
+from django.conf import settings
 
 import server.views
 
@@ -27,5 +29,7 @@ urlpatterns = [
     path('borrow/dasan/', server.views.dasan, name="dasan"),
     path('borrow/yangjae/', server.views.yangjae, name="yangjae"),
     path('record/', server.views.record, name="record"),
-    path('user_info', server.views.user_info, name="user_info"),
+    path('user_info/', server.views.user_info, name="user_info"),
 ]
+
+urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
