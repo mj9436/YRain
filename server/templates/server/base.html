@@ -1,37 +1,57 @@
 <!DOCTYPE html>
-<html>
-    <head lang="en">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
-            .bottom_menu { position: fixed; bottom: 0px; left: 0px; width: 100%; height: 70px; z-index:100; border-top: 1px solid black; background-color: white }
-            .bottom_menu > div { float: left; width: 20%; height: 100%; text-align: center; padding-top: 20px; }
-        </style>
-    </head>
-    <body>
-        {% block contents %}
-        {% endblock contents %}
-        <div class="bottom_menu">
-            <div name="menu" value="1" onClick="location.href='/'">
-                홈
-                <img src="1.png">
-            </div>
-            <div onClick="location.href='/borrow/'">
-                우산대여
-                <img src="2.png">
-            </div>
-            <div onClick="location.href='/cur_status/'">
-                대여현황
-                <img src="3.png">
-            </div>
-            <div onClick="location.href='/record/'">
-                대여기록
-                <img src="4.png">
-            </div>
-            <div onClick="location.href='/user_info/'">
-                사용자
-                <img src="5.png">
-            </div>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" type="text/css" href="/admin/css/home.css"> -->
+    <title>main</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}"/>
+{% comment %}     <style>
+        .bottom_menu { 
+            position: fixed; bottom: 0px; left: 0px; 
+            width: 100%; height: 70px; z-index:100; 
+            border-top: 1px solid black; background-color: white 
+        }
+        
+        .bottom_menu > div { 
+            float: left; 
+            width: 20%; height: 100%; 
+            text-align: center; 
+            padding-top: 20px; 
+        }
+    </style> {% endcomment %}
+</head>
+<body>
+    {% block contents %}
+    {% endblock contents %}
+    <div class="bottom_menu">
+        <div name="menu" value="1" onClick="location.href='/'">
+            홈
+            <img src="1.png">
         </div>
-    </body>
+        <div onClick="location.href='/borrow/'">
+            우산대여
+            <img src="2.png">
+        </div>
+        <div onClick="location.href='/cur_status/'">
+            대여현황
+            <img src="3.png">
+        </div>
+        <div>
+            대여기록
+            <img src="4.png">
+        </div>
+        <div>
+            사용자
+            <img src="5.png">
+        </div>
+    </div>
+</body>
 </html>
