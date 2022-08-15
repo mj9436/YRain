@@ -1,0 +1,67 @@
+
+{% extends 'server/base.html' %}
+
+
+{% block styles %}
+    table {
+        margin-left:auto; 
+        margin-right:auto;
+    }
+
+    table, td, th {
+        border-collapse : collapse;
+    };
+    td, th {
+      text-align : center;
+      vertical-align : middle;
+    }
+
+    #center{
+        
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .display_table_cell { display:table-cell; text-align:center; vertical-align:middle; }
+{% endblock styles %}
+
+
+{% block contents %}
+<br>
+<div id="center">
+<table width="300" height="250">
+    <tr>
+        {% for umb in dasan %}
+        <td width="60" class="display_table_cell">
+            {{umb.dasan_no}}
+        </td>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for umb in dasan %}
+        <td width="60" class="display_table_cell">
+            {% if umb.used %}
+                <img src="/static/images/umbrella.png" alt="logo" height="150" width="60">
+            {% endif %}
+        </td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <form type="post" action="result/">
+            {% csrf_token %}
+            {% for umb in dasan %}
+            <td width="60" class="display_table_cell">
+                {% if umb.used %}
+                <span style="color:red">반납불가</span>
+                {% else %}
+                <button type="submit" id="dasan_btn" name="dasan_btn" value={{umb.dasan_no}}>선택</button>
+                {% endif %}
+                
+            </td>
+            {% endfor %}
+        </form>
+    </tr>
+</table>
+</div>
+{% endblock contents %}

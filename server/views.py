@@ -1,9 +1,12 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .models import User
-#import RPi.GPIO as GPIO
+from .models import Dasan
+from .models import Record
+import RPi.GPIO as GPIO
 import time
 import logging
+import datetime
 servo_pin=18
 
 def main(request):
@@ -41,7 +44,8 @@ def cur_status(request):
     return render(request, 'server/cur_status.html');
 
 def dasan(request):
-    return render(request, 'server/dasan.html');
+    dasanu=Dasan.objects.all()
+    return render(request, 'server/dasan.html', {'dasan':dasanu});
 
 def yangjae(request):
     return render(request, 'server/yangjae.html');
@@ -75,7 +79,60 @@ def login(request):
 
 def signup(request):
     if(request.method=="POST"):
+        id=User.objects.filter(user_id=request.POST['user_id']).count()
+        print(id)
+        if(id!=0):
+            return redirect(signup);
         User.objects.create(user_id=request.POST['user_id'], password=request.POST['password'])
         return redirect(login)
     return render(request, 'server/signup.html');
+    
+    
+def dasan_result(request):
+    num=request.GET.get('dasan_btn')
+    dasantmp=Dasan.objects.get(dasan_no=num)
+    dasantmp.used=0
+    dasantmp.save()
+    Record.objects.create(user_id=request.session['user'], borrow_date=datetime.date.today(), borrow_status=1)
+    print(dasantmp.used)
+    open_door()
+    return redirect(dasan)
 
+
+def test(request):
+    return render(request, 'server/test.html');
+
+
+def select(request):
+    return render(request, 'server/select.html');
+
+def bannap(request):
+    return render(request, 'server/bannap.html');
+
+def bannap_dasan(request):
+    dasanu=Dasan.objects.all()
+    return render(request, 'server/bannap_dasan.html', {'dasan':dasanu});
+
+def bannap_dasan_result(request):
+    num=request.GET.get('dasan_btn')
+    dasantmp=Dasan.objects.get(dasan_no=num)
+    dasantmp.used=1
+    dasantmp.save()
+    recordtmp=Record.objects.get(user_id=request.session['user'],borrow_status=1)
+    recordtmp.borrow_status=0
+    recordtmp.save()
+    open_door()
+    return redirect(bannap_dasan)
+
+def open_door():
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(servo_pin, GPIO.OUT)
+    pwm=GPIO.PWM(servo_pin, 50)
+
+    pwm.start(3.0)
+    pwm.ChangeDutyCycle(11.0)
+    time.sleep(5.0)
+    pwm.ChangeDutyCycle(6.5)
+    time.sleep(1.0)
+    pwm.stop()
+    GPIO.cleanup()
