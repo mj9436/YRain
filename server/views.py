@@ -37,9 +37,8 @@ def main(request):
 
 def borrow(request):
     if Record.objects.filter(user_id=request.session['user'],borrow_status=1).exists():
-      return render(request, 'server/borrow.html');
-    return redirect(select)
-
+        return redirect(select)
+    return render(request, 'server/borrow.html');
 def cur_status(request):
     bannaptmp=Record.objects.filter(user_id=request.session['user'],borrow_status=0)
     try:
@@ -105,7 +104,7 @@ def dasan_result(request):
     num=request.GET.get('dasan_btn')
     print("1")
     print(datetime.now().date())
-    Record.objects.create(user_id=request.session['user'], borrow_date=datetime.now().date(), borrow_status=1,bannap_date=datetime.now().date())
+    Record.objects.create(user_id=request.session['user'], borrow_date=datetime.now().date(), borrow_status=1)
     dasantmp=Dasan.objects.get(dasan_no=num)
     dasantmp.used=0
     dasantmp.save()
