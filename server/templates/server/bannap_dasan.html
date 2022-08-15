@@ -53,9 +53,9 @@
             {% for umb in dasan %}
             <td width="60" class="display_table_cell">
                 {% if umb.used %}
-                    <button type="submit" id="dasan_btn" name="dasan_btn" value={{umb.dasan_no}}>선택</button>
+                <span style="color:red">반납불가</span>
                 {% else %}
-                    <span style="color:red">대여불가</span>
+                <button type="submit" id="dasan_btn" name="dasan_btn" value={{umb.dasan_no}}>선택</button>
                 {% endif %}
                 
             </td>

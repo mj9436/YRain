@@ -1,16 +1,71 @@
 {% extends 'server/base.html' %}
+{% load static %}
+{% block styles %}
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+
+{% endblock styles %}
+
 
 {% block login %}
 
+<main class="form-signin">
 <form name="loginform" method="post">
     {% csrf_token %}
-    아이디:<br><input type="text" name="user_id">
+    
+    <img class="mb-4" src="/static/images/logo_bg.png" alt="" width="120" height="120">
+
+    <div class="form-floating">
+      <input type="text" class="form-control" name="user_id" id="floatingInput" placeholder="ID">
+      <label for="floatingInput">ID</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div>
     <br>
-    비밀번호:<br><input type="password" name="password">
-    <br><br>
-    <input type="submit" class="btn btn-primary" value="로그인">
+    <button class="w-70 btn btn-lg btn-primary" type="submit" style="width:70%; background-color: black; border-color:black;" >로그인</button>
 </form>
 <br>
-<input onClick="location.href='/signup/'"class="btn btn-primary" value="회원가입">
+<input onClick="location.href='/signup/'"class="w-70 btn btn-lg btn-primary"style="width:70%; background-color: black;border-color:black;" value="회원가입">
+</main>
 {% endblock login %}
 

@@ -34,6 +34,12 @@ urlpatterns = [
     path('money/', server.views.money, name="money"),
     path('app_info/', server.views.app_info, name="app_info"),
     path('signup/', server.views.signup, name="signup"),
+    path('test/', server.views.test, name="test"),
+    path('borrow/dasan/result/', server.views.dasan_result, name="dasan_result"),
+    path('select/', server.views.select, name="select"),
+    path('bannap/', server.views.bannap, name="bannap"),
+    path('bannap/dasan/', server.views.bannap_dasan, name="bannap_dasan"),
+    path('bannap/dasan/result/', server.views.bannap_dasan_result, name="bannap_dasan_result"),
 ]
 
 urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

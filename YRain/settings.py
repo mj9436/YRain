@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-pr76*=hdga$bcn5gx^dw(hut9_m6)mj5!jtj@v@g7=ta(^-v!f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.200.164','1.222.188.148','127.0.0.1']
+ALLOWED_HOSTS = ['192.168.200.164','1.222.188.148','127.0.0.1','0.0.0.0']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'server.apps.ServerConfig',
     'bootstrap4',
+    'django_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -79,9 +80,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # mysqlclient librarly 설치
         'NAME': 'YRain',
-        'USER': 'root',
-        'PASSWORD': '3rdeye', # mariaDB 설치 시 입력한 root 비밀번호 입력
-        'HOST': '127.0.0.1',
+        'USER': 'yrainuser',
+        'PASSWORD': 'yrain', # mariaDB 설치 시 입력한 root 비밀번호 입력
+        'HOST': '192.168.200.164',
         'PORT': '3306'
     }
 }

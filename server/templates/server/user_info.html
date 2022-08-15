@@ -1,26 +1,49 @@
 {% extends 'server/base.html' %}
-<!DOCTYPE html>
+
 {% load static %}
-<html>
-    <head>
-        <title>Document</title>
-        <link rel="stylesheet" href="{% static 'css/user_info.css' %}"/>
-    </head>
-    <body>
-        {% block contents %}
-        <section>
-            <div class="user-info-container">
-                <div name="profile" value="1" onClick="location.href='/profile/'">
-                    <small>내 프로필</small>
-                </div>
-                <div name="money" value="1" onClick="location.href='/money/'">
-                    <small>보증금 관리</small>
-                </div>
-                <div name="app_info" value="1" onClick="location.href='/app_info/'">
-                    <small>앱 정보</small>
-                </div>
-            </div>
-        </section>
-        {% endblock contents %}
-    </body>
-</html>
+
+{% block styles %}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  text-align:center;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.center{
+    margin:auto;
+}
+{% endblock styles %}
+
+{% block contents %}
+<main class="center">
+    <div>
+<form name="loginform" method="post">
+    {% csrf_token %}
+    <div class="form-floating">
+        <input type="text" class="form-control" name="nickname" id="floatingInput" placeholder="nickname" value={{user.nickname}}>
+        <label for="floatingInput">닉네임</label>
+    </div><br>
+    <div class="form-floating">
+        <input type="text" class="form-control" name="hakbu" id="floatingPassword" placeholder="학부" value={{user.hakbu}}>
+        <label for="floatingPassword">학부</label>
+    </div><br>
+    <div class="form-floating">
+        <input type="text" class="form-control" name="hakgwa" id="floatingPassword" placeholder="학과" value={{user.hakgwa}}>
+        <label for="floatingPassword">학과</label>
+    </div>
+    <br>
+    <button class="w-70 btn btn-lg btn-primary" type="submit" style="width:70%; background-color: black; border-color:black;" >저장</button>
+</form>
+</div><br>
+<input onClick="location.href='/'"class="w-70 btn btn-lg btn-primary"style="width:70%; background-color: black;border-color:black;" value="로그아웃">
+<br><br>
+<br>v1.0.0<br>
+</main>
+{% endblock contents %}
