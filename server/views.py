@@ -152,7 +152,7 @@ def open_door():
     pwm.stop()
     GPIO.cleanup() """
     
-
+# test
     
 
     
