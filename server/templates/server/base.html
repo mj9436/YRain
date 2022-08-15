@@ -24,16 +24,16 @@
 
     {% block login %}
     <div class="bottom_menu">
-        <div name="menu" value="1" onClick="location.href='/cur_status/'">
-            <img src="/static/images/book.png" alt="borrow"height="80" width="80" >
+        <div name="menu" value="1">
+            <img src="/static/images/book.png" alt="borrow"height="80" width="80" onClick="location.href='/cur_status/'" >
         </div>
         <div></div>
         <div onClick="location.href='/user_info/'">
             <img src="/static/images/user.png" style="margin-top:10px"  alt="user_info" height="60" width="50">
         </div>
     </div>
-    <div class="bottom_main" onClick="location.href='/select/'">
-        <img src="/static/images/logo_bg.png" alt="logo" height="110" width="110">
+    <div class="bottom_main">
+        <img src="/static/images/logo_bg.png" alt="logo" height="110" width="110"  onClick="location.href='/select/'" >
     </div>
     {% endblock login %}
 </body>

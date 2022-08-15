@@ -36,9 +36,9 @@ def main(request):
         return render(request, 'server/main.html', {'GET':"test"});
 
 def borrow(request):
-    #if request.method=='POST':
-     #   return redirect(index)
-    return render(request, 'server/borrow.html');
+    if Record.objects.filter(user_id=request.session['user'],borrow_status=1).exists():
+      return render(request, 'server/borrow.html');
+    return redirect(select)
 
 def cur_status(request):
     return render(request, 'server/cur_status.html');
@@ -50,9 +50,17 @@ def dasan(request):
 def yangjae(request):
     return render(request, 'server/yangjae.html');
 
-def user_info(request):
-    return render(request, 'server/user_info.html');
 
+def user_info(request):
+    userinf=User.objects.get(user_id=request.session['user'])
+    if request.method=='POST':
+        userinf.nickname=request.POST['nickname']
+        userinf.hakbu=request.POST['hakbu']
+        userinf.hakgwa=request.POST['hakgwa']
+        userinf.save()
+        return redirect(user_info)
+    return render(request, 'server/user_info.html', {'user':userinf});
+    
 def profile(request):
     return render(request, 'server/profile.html');
 
