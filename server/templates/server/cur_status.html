@@ -1,5 +1,28 @@
 
 {% extends 'server/base.html' %}
 {% block contents %}
-대여현황
+
+    <div class="current_borrow">
+        {% if borrowtmp != 0 %}
+            <div class="current_borrow_record">
+                <span>{{borrowtmp.borrow_date}}에 {{borrowtmp.location}}에서 대여한 우산이
+                하나 있습니다.</span>
+            </div>
+        {% else %}
+            <span>현재 대여 중인 우산이 없습니다.</span>
+        {% endif %}
+    </div>
+    <hr>
+    <div class="past_borrow">
+            <div class="past_borrow_record">
+                {% if bannaptmp %}
+                    {% for bannap in bannaptmp %}
+                    <span>{{bannap.record_no}}: {{bannap.borrow_date}}에 {{bannap.location}}에서
+                        우산을 대여하고, {{bannap.bannap_date}}에 {{bannap.location}}에서 우산을 반납했습니다.</span>
+                    {% endfor %}
+                {% else %}
+                    <span>현재 반납 기록이 없습니다.</span>
+                {% endif %}
+            </div>
+    </div>
 {% endblock contents %}

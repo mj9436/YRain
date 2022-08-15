@@ -3,10 +3,10 @@ from django.http import HttpResponse
 from .models import User
 from .models import Dasan
 from .models import Record
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import time
 import logging
-import datetime
+from datetime import datetime
 servo_pin=18
 
 def main(request):
@@ -41,7 +41,12 @@ def borrow(request):
     return redirect(select)
 
 def cur_status(request):
-    return render(request, 'server/cur_status.html');
+    bannaptmp=Record.objects.filter(user_id=request.session['user'],borrow_status=0)
+    try:
+        borrowtmp=Record.objects.get(user_id=request.session['user'],borrow_status=1)
+        return render(request, 'server/cur_status.html', {'borrowtmp':borrowtmp , 'bannaptmp':bannaptmp});
+    except:
+        return render(request, 'server/cur_status.html', {'borrowtmp':0 , 'bannaptmp':bannaptmp});
 
 def dasan(request):
     dasanu=Dasan.objects.all()
@@ -98,10 +103,12 @@ def signup(request):
     
 def dasan_result(request):
     num=request.GET.get('dasan_btn')
+    print("1")
+    print(datetime.now().date())
+    Record.objects.create(user_id=request.session['user'], borrow_date=datetime.now().date(), borrow_status=1,bannap_date=datetime.now().date())
     dasantmp=Dasan.objects.get(dasan_no=num)
     dasantmp.used=0
     dasantmp.save()
-    Record.objects.create(user_id=request.session['user'], borrow_date=datetime.date.today(), borrow_status=1)
     print(dasantmp.used)
     open_door()
     return redirect(dasan)
@@ -123,7 +130,8 @@ def bannap_dasan(request):
 
 def bannap_dasan_result(request):
     num=request.GET.get('dasan_btn')
-    dasantmp=Dasan.objects.get(dasan_no=num)
+    dasantmp=Dasan.objects.get(dasan_no=num) 
+    #'select * from Dasan where dasan_no=num'
     dasantmp.used=1
     dasantmp.save()
     recordtmp=Record.objects.get(user_id=request.session['user'],borrow_status=1)
@@ -133,7 +141,7 @@ def bannap_dasan_result(request):
     return redirect(bannap_dasan)
 
 def open_door():
-    GPIO.setmode(GPIO.BCM)
+    """ GPIO.setmode(GPIO.BCM)
     GPIO.setup(servo_pin, GPIO.OUT)
     pwm=GPIO.PWM(servo_pin, 50)
 
@@ -143,4 +151,9 @@ def open_door():
     pwm.ChangeDutyCycle(6.5)
     time.sleep(1.0)
     pwm.stop()
-    GPIO.cleanup()
+    GPIO.cleanup() """
+    
+
+    
+
+    

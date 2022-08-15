@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+
 class Record(models.Model):
     record_no = models.AutoField(primary_key=True)
     user_id = models.CharField(max_length=10)
@@ -12,7 +13,6 @@ class Record(models.Model):
     class Meta:
         managed = False
         db_table = 'record'
-
 
 class User(models.Model):
     user_no = models.AutoField(primary_key=True)

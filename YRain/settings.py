@@ -79,9 +79,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # mysqlclient librarly 설치
         'NAME': 'YRain',
-        'USER': 'root',
-        'PASSWORD': '1234', # mariaDB 설치 시 입력한 root 비밀번호 입력
-        'HOST': '127.0.0.1',
+        'USER': 'yrainuser',
+        'PASSWORD': 'yrain', # mariaDB 설치 시 입력한 root 비밀번호 입력
+        'HOST': '192.168.200.164',
         'PORT': '3306'
     }
 }
